@@ -21,7 +21,7 @@ namespace KDSB20240906.Models.DAL
 
         public async Task<ProductKDSB> GetById(int id)
         {
-            var products = await _context.products.FirstOrDefaultAsync(s => s.Id == id);
+            var products = await _context.ProductsKDSB.FirstOrDefaultAsync(s => s.Id == id);
             return products != null ? products : new ProductKDSB();
         }
 
@@ -47,7 +47,7 @@ namespace KDSB20240906.Models.DAL
             if (productDelete.Id > 0)
             {
                 // Elimina el cliente de la base de datos.
-                _context.products.Remove(productDelete);
+                _context.ProductsKDSB.Remove(productDelete);
                 result = await _context.SaveChangesAsync();
             }
             return result;
@@ -55,7 +55,7 @@ namespace KDSB20240906.Models.DAL
 
         private IQueryable<ProductKDSB> Query(ProductKDSB product)
         {
-            var query = _context.products.AsQueryable();
+            var query = _context.ProductsKDSB.AsQueryable();
             if (!string.IsNullOrWhiteSpace(product.NombreKDSB))
                 query = query.Where(s => s.NombreKDSB.Contains(product.NombreKDSB));
             if (!string.IsNullOrWhiteSpace(product.DescripcionKDSB))

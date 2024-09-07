@@ -10,6 +10,6 @@ namespace KDSB20240906.Models.DAL
         {
         }
 
-        public DbSet<ProductKDSB> products { get; set; }
+        public DbSet<ProductKDSB> ProductsKDSB { get; set; }
     }
 }
