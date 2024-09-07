@@ -1,0 +1,45 @@
+﻿@model KDSB.DTOs.ProducDTOs.GetIdResultProductDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalle del producto</h1>
+
+<form asp-action="Details">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Id" type="hidden" />
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="NombreKDSB" class="control-label"></label>
+                <input asp-for="NombreKDSB" disabled class="form-control" />
+                <span asp-validation-for="NombreKDSB" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label asp-for="DescripcionKDSB" class="control-label"></label>
+                <input asp-for="DescripcionKDSB" disabled class="form-control" />
+                <span asp-validation-for="DescripcionKDSB" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <textarea asp-for="Precio" disabled class="form-control"></textarea>
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row-cols-6">
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-secondary">Ir ver clientes</a>
+        </div>
+    </div>
+</form>
+
+
