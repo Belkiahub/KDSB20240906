@@ -21,8 +21,8 @@ namespace KDSB20240906.Models.DAL
 
         public async Task<ProductKDSB> GetById(int id)
         {
-            var customer = await _context.products.FirstOrDefaultAsync(s => s.Id == id);
-            return customer != null ? customer : new ProductKDSB();
+            var products = await _context.products.FirstOrDefaultAsync(s => s.Id == id);
+            return products != null ? products : new ProductKDSB();
         }
 
         public async Task<int> Edit(ProductKDSB product)
@@ -43,11 +43,11 @@ namespace KDSB20240906.Models.DAL
         public async Task<int> Delete(int id)
         {
             int result = 0;
-            var customerDelete = await GetById(id);
-            if (customerDelete.Id > 0)
+            var productDelete = await GetById(id);
+            if (productDelete.Id > 0)
             {
                 // Elimina el cliente de la base de datos.
-                _context.products.Remove(customerDelete);
+                _context.products.Remove(productDelete);
                 result = await _context.SaveChangesAsync();
             }
             return result;

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KDSB20240906", "KDSB20240906\KDSB20240906.csproj", "{07E1C16B-8C0A-4713-954D-51541AFB615A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KDSB.DTOs", "KDSB.DTOs\KDSB.DTOs.csproj", "{8A75B633-F807-4412-9634-F860491DFE47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{07E1C16B-8C0A-4713-954D-51541AFB615A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07E1C16B-8C0A-4713-954D-51541AFB615A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07E1C16B-8C0A-4713-954D-51541AFB615A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A75B633-F807-4412-9634-F860491DFE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A75B633-F807-4412-9634-F860491DFE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A75B633-F807-4412-9634-F860491DFE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A75B633-F807-4412-9634-F860491DFE47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
