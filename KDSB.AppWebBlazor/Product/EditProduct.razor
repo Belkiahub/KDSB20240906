@@ -1,0 +1,101 @@
+﻿@page "/edit-product/{Id:int}"
+@using KDSB.DTOs.ProducDTOs;
+@using Microsoft.AspNetCore.Components.Forms;
+@using System.ComponentModel.DataAnnotations;
+@using KDSB.AppWebBlazor.Data;
+
+
+@if (isSuccess == false && isError == false)
+{
+    <h3>Modificar Cliente</h3>
+
+    <EditForm Model="editProduct" OnValidSubmit="Edit">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="NombreKDSB">Nombre:</label>
+                    <InputText class="form-control" @bind-Value="editProduct.NombreKDSB" />
+                    <ValidationMessage For="() => editProduct.NombreKDSB" />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="DescripcionKDSB">Descripcion:</label>
+                    <InputTextArea class="form-control" @bind-Value="editProduct.DescripcionKDSB" />
+                    <ValidationMessage For="() => editProduct.DescripcionKDSB" />
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="Precio">Precio:</label>
+                    <InputNumber class="form-control" @bind-Value="editProduct.Precio" />
+                    <ValidationMessage For="() => editProduct.Precio" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Modificar</button>
+                <NavLink href="/product-list" class="btn btn-secondary">Cancelar</NavLink>
+            </div>
+        </div>
+    </EditForm>
+}
+else if (isSuccess)
+{
+    editProduct = new EditProductDTO();
+    isError = false;
+    <p class="alert alert-success">Cliente se modifico con éxito.</p>
+    <NavLink href="/product-list" class="btn btn-primary">Aceptar</NavLink>
+}
+else if (isError)
+{
+    <p class="alert alert-error">Sucedio un error al intentar modificar. o no ha realizado ninguna modificacion al registro actual</p>
+    <NavLink href="/product-list" class="btn btn-primary">Aceptar</NavLink>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    // Inyección de dependencia de CustomerService para
+    // acceder a los servicios relacionados con los clientes
+    [Inject]
+    ProductKDSBService productKDSBService { get; set; }
+
+    // Declaración e inicialización de un objeto "customer"
+    //  para almacenar los detalles del cliente
+    EditProductDTO editProduct = new EditProductDTO();
+
+    // Declaración de variables booleanas para manejar el estado de éxito y error
+    bool isSuccess = false;
+    bool isError = false;
+
+    // Método que se llama cuando se inicializa el componente
+    protected override async Task OnInitializedAsync()
+    {
+        // Realiza una llamada asincrónica para obtener los
+        // detalles del cliente por su Id
+        var productDetail = await productKDSBService.GetById(Id);
+
+        // Inicializa el objeto "customer" con los detalles del cliente obtenidos
+        editProduct = new EditProductDTO(productDetail);
+    }
+
+    // Método para editar el cliente
+    private async Task Edit()
+    {
+        // Realiza una llamada asincrónica para editar la información del cliente
+        int result = await productKDSBService.Edit(editProduct);
+
+        // Verifica si el resultado de la edición es diferente
+        // de cero (éxito) o igual a cero (error)
+        if (result != 0)
+            isSuccess = true;
+        else
+            isError = true;
+    }
+
+}
