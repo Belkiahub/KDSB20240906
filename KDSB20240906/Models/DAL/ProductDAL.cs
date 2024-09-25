@@ -25,6 +25,12 @@ namespace KDSB20240906.Models.DAL
             return products != null ? products : new ProductKDSB();
         }
 
+        public async Task<List<ProductKDSB>> GetAll()
+        {
+            var products = await _context.ProductsKDSB.ToListAsync();
+            return products;
+        }
+
         public async Task<int> Edit(ProductKDSB product)
         {
             int result = 0;

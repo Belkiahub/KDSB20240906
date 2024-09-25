@@ -52,6 +52,27 @@ namespace KDSB20240906.Endpoints
                 return productResult;
             });
 
+            app.MapGet("/products", async (ProductDAL productDAL) =>
+            {
+                // Obtener todos los productos
+                var products = await productDAL.GetAll();
+
+                // Mapeo de los productos a un DTO si es necesario
+                var productResults = products.Select(product => new GetIdResultProductDTO
+                {
+                    Id = product.Id,
+                    NombreKDSB = product.NombreKDSB,
+                    DescripcionKDSB = product.DescripcionKDSB,
+                    Precio = product.Precio
+                }).ToList();
+
+                // Verificar si se encontraron productos y devolver la respuesta correspondiente
+                if (productResults.Any())
+                    return Results.Ok(productResults);
+                else
+                    return Results.NotFound("No products found.");
+            });
+
 
             app.MapGet("/product/{id}", async (int id, ProductDAL productDAL) =>
             {
